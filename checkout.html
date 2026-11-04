@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemesanan/Checkout - BUKU KITA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="assets/logo.png" alt="Logo Buku Kita">
+      <div>
+        <h1>BUKU KITA</h1>
+        <small>TOKO BUKU ONLINE</small>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="userchip" id="userChip">👤 Mahasiswa</span>
+    <button class="btn small merah" id="btnKeluar">Logout</button>
+  </header>
+
+  <nav class="mainnav">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="stok.html">📚 Stok/Katalog</a>
+    <a href="checkout.html" class="active">🛒 Pemesanan</a>
+    <a href="tracking.html">🚚 Tracking</a>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ====== TABEL KERANJANG PESANAN (bisa edit & hapus) ====== -->
+    <section class="card" aria-label="Keranjang pesanan">
+      <h2>🛒 Pesanan Anda</h2>
+      <p class="ket">
+        Data dari <code>dataPesanan</code> (file <code>js/data.js</code>).
+        Klik <b>Edit</b> untuk mengubah isi form di bawah, <b>Hapus</b> untuk menghapus.
+      </p>
+      <div class="tablewrap">
+        <table class="tabel">
+          <thead>
+            <tr>
+              <th>ID</th><th>Buku</th><th>Qty</th><th>Harga</th>
+              <th>Subtotal</th><th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyPesanan"></tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px; font-size:1rem">
+        Total bayar: <b id="checkoutTotal" style="color:#123a63; font-size:1.2rem">Rp 0</b>
+      </p>
+    </section>
+
+    <!-- ====== FORM TAMBAH / EDIT PESANAN ====== -->
+    <section class="card" aria-label="Form pesanan">
+      <h2>✏️ Tambah / Ubah Pesanan</h2>
+      <p class="ket">Pilih buku dari katalog, atur jumlah, lalu simpan.</p>
+      <form id="formPesanan" novalidate>
+        <div class="formrow">
+          <div>
+            <label for="cBuku">Pilih buku</label>
+            <select id="cBuku"></select>
+          </div>
+          <div>
+            <label for="cQty">Jumlah</label>
+            <input type="number" id="cQty" min="1" max="99" value="1">
+          </div>
+        </div>
+        <label for="cPembeli">Nama pembeli</label>
+        <input type="text" id="cPembeli" placeholder="Nama pembeli">
+        <div class="detail-grid" style="max-width:420px">
+          <div><div class="label">Harga satuan</div><div class="nilai" id="rincianHarga">-</div></div>
+          <div><div class="label">Total pesanan ini</div><div class="nilai" id="rincianTotal">-</div></div>
+        </div>
+        <div style="margin-top:16px">
+          <button type="submit" class="btn kuning" id="btnPesanan">＋ Tambah Pesanan</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ====== INFORMASI PEMESAN & PEMBAYARAN (sesuai soal) ====== -->
+    <section class="card" aria-label="Informasi pemesan dan pembayaran">
+      <h2>💳 Informasi Pemesan &amp; Pembayaran</h2>
+      <p class="ket">Lengkapi data berikut. Semua kolom divalidasi JavaScript.</p>
+
+      <form id="formBayar" novalidate>
+        <fieldset>
+          <legend>🧑 Data Pemesan</legend>
+          <div class="formrow">
+            <div>
+              <label for="cNama">Nama lengkap</label>
+              <input type="text" id="cNama" placeholder="Nama Anda">
+            </div>
+            <div>
+              <label for="cEmail">Email</label>
+              <input type="email" id="cEmail" placeholder="nama@contoh.com">
+            </div>
+          </div>
+          <div class="formrow">
+            <div>
+              <label for="cTelp">No. HP (08xx)</label>
+              <input type="text" id="cTelp" placeholder="081234567890">
+            </div>
+            <div>
+              <label for="cKota">Kota</label>
+              <input type="text" id="cKota" placeholder="Cikarang, Bekasi">
+            </div>
+          </div>
+          <label for="cAlamat">Alamat lengkap (min. 10 karakter)</label>
+          <input type="text" id="cAlamat" placeholder="Jl. Kalimalang No. 1, Tegal Danas">
+        </fieldset>
+
+        <fieldset>
+          <legend>💰 Pembayaran</legend>
+          <div class="formrow">
+            <div>
+              <label for="cMetode">Metode pembayaran</label>
+              <select id="cMetode">
+                <option value="">-- Pilih metode --</option>
+                <option>Transfer BCA</option>
+                <option>Transfer Mandiri</option>
+                <option>QRIS</option>
+                <option>COD</option>
+              </select>
+            </div>
+            <div>
+              <label>Ringkasan total</label>
+              <div class="nilai" id="rincianTotalAll" style="font-size:1.3rem; margin-top:6px">Rp 0</div>
+            </div>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn hijau" id="btnBayar">✅ Proses Pemesanan</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="pagefoot">
+    © 2026 BUKU KITA &mdash; Membangun frontend dengan HTML semantik, CSS, dan JavaScript DOM.
+  </footer>
+
+  <!-- ====== MODAL ALERT ====== -->
+  <div class="modal-layar" id="modalAlert">
+    <div class="modal-kotak">
+      <div style="font-size:2.4rem" id="alertIkon">❌</div>
+      <h3 style="text-align:center" id="alertJudul">Judul</h3>
+      <p style="text-align:center" id="alertPesan">Pesan</p>
+      <div class="modal-aksi">
+        <button class="btn kuning" data-tutup="#modalAlert">Oke</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL KONFIRMASI (hapus pesanan) ====== -->
+  <div class="modal-layar" id="modalConfirm">
+    <div class="modal-kotak" style="text-align:center">
+      <div style="font-size:2.4rem">🗑️</div>
+      <h3>Konfirmasi</h3>
+      <p id="confirmPesan">Yakin?</p>
+      <div class="modal-aksi" style="justify-content:center">
+        <button class="btn putih" data-tutup="#modalConfirm">Batal</button>
+        <button class="btn merah" id="btnConfirmOk">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL SUKSES CHECKOUT ====== -->
+  <div class="modal-layar" id="modalSukses">
+    <div class="modal-kotak" style="text-align:center">
+      <div style="font-size:2.6rem">🎉</div>
+      <h3>Pemesanan Berhasil!</h3>
+      <p>Simpan nomor delivery order untuk tracking.</p>
+      <div class="detail-grid" style="text-align:left">
+        <div><div class="label">Nama</div><div class="nilai" id="sumNama">-</div></div>
+        <div><div class="label">Email</div><div class="nilai" id="sumEmail">-</div></div>
+        <div><div class="label">Alamat</div><div class="nilai" id="sumAlamat">-</div></div>
+        <div><div class="label">Metode</div><div class="nilai" id="sumMetode">-</div></div>
+        <div style="grid-column:1/3"><div class="label">Total dibayar</div>
+          <div class="nilai" id="sumTotal" style="font-size:1.25rem">-</div></div>
+      </div>
+      <div class="modal-aksi" style="justify-content:center">
+        <button class="btn kuning" id="btnSumOk">Oke, Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - BUKU KITA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pagelogin">
+
+  <main>
+    <div class="loginbox">
+      <div class="head">
+        <img src="assets/logo.png" alt="Logo Buku Kita">
+        <h1>BUKU KITA</h1>
+        <p>Aplikasi Pemesanan Buku Online</p>
+        <p style="color:#123a63; font-size:.78rem; letter-spacing:1.5px;">TOKO BUKU &minus; UTS PEMROGRAMAN WEB</p>
+      </div>
+
+      <!-- FORM LOGIN: email + password + tombol Login (sesuai soal) -->
+      <form id="formLogin" novalidate>
+        <label for="lemail">Email</label>
+        <input type="email" id="lemail" placeholder="nama@contoh.com" autocomplete="email">
+
+        <label for="lpass">Password</label>
+        <input type="password" id="lpass" placeholder="Password Anda">
+
+        <p class="pesan-err" id="pesanLogin"></p>
+
+        <div style="margin-top:18px">
+          <button type="submit" class="btn kuning" style="width:100%">🔑 Login</button>
+        </div>
+      </form>
+
+      <!-- tombol Lupa Password & Daftar (membuka modal box, sesuai soal) -->
+      <div class="linkbawah">
+        <a id="btnLupa" onclick="bukaModal('#modalLupa')">Lupa password?</a>
+        <a id="btnDaftar" onclick="bukaModal('#modalDaftar')">Daftar</a>
+      </div>
+
+      <div class="hint">
+        <b>Akun demo:</b><br>
+        email: daniel@bukukita.id &nbsp;|&nbsp; password: uts123
+      </div>
+    </div>
+  </main>
+
+  <!-- ================== MODAL LUPA PASSWORD ================== -->
+  <div class="modal-layar" id="modalLupa">
+    <div class="modal-kotak">
+      <button class="modal-tutup" data-tutup="#modalLupa" aria-label="Tutup">✕</button>
+      <h3>🔐 Lupa Password</h3>
+      <p>Masukkan email Anda, kami akan mengirim instruksi reset password.</p>
+      <form id="formLupa" novalidate>
+        <label for="lupaEmail">Email terdaftar</label>
+        <input type="email" id="lupaEmail" placeholder="nama@contoh.com">
+        <div class="modal-aksi">
+          <button type="button" class="btn putih" data-tutup="#modalLupa">Batal</button>
+          <button type="submit" class="btn kuning">Kirim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================== MODAL DAFTAR ================== -->
+  <div class="modal-layar" id="modalDaftar">
+    <div class="modal-kotak">
+      <button class="modal-tutup" data-tutup="#modalDaftar" aria-label="Tutup">✕</button>
+      <h3>🧾 Daftar Akun Baru</h3>
+      <p>Isi data berikut untuk membuat akun belanja.</p>
+      <form id="formDaftar" novalidate>
+        <label for="daftarNama">Nama lengkap</label>
+        <input type="text" id="daftarNama" placeholder="Nama Anda">
+        <label for="daftarEmail">Email</label>
+        <input type="email" id="daftarEmail" placeholder="nama@contoh.com">
+        <label for="daftarPass">Password (min. 5 karakter)</label>
+        <input type="password" id="daftarPass" placeholder="Password">
+        <label for="daftarPass2">Ulangi password</label>
+        <input type="password" id="daftarPass2" placeholder="Ulangi password">
+        <div class="modal-aksi">
+          <button type="button" class="btn putih" data-tutup="#modalDaftar">Batal</button>
+          <button type="submit" class="btn">Daftar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================== MODAL ALERT (alert box custom) ================== -->
+  <div class="modal-layar" id="modalAlert">
+    <div class="modal-kotak">
+      <div style="font-size:2.4rem" id="alertIkon">❌</div>
+      <h3 style="text-align:center" id="alertJudul">Judul</h3>
+      <p style="text-align:center" id="alertPesan">Pesan</p>
+      <div class="modal-aksi">
+        <button class="btn kuning" data-tutup="#modalAlert">Oke</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+/* ==========================================================================
+   style.css (EXTERNAL CSS) - Aplikasi Pemesanan Buku "BUKU KITA"
+   Tema: biru tua + kuning (mengikuti warna logo)
+   ========================================================================== */
+
+/* ---- 1. Variabel warna & pengaturan dasar ---- */
+:root {
+  --biru-tua:  #123a63;
+  --biru:      #1f4e79;
+  --kuning:    #f4b41a;
+  --kuning-tb: #e39b0f;
+  --merah:     #e0453c;
+  --hijau:     #27ae60;
+  --abu:       #f5f7fa;
+  --abu-2:     #e2e8f0;
+  --teks:      #22303f;
+  --teks-2:    #5b6b7b;
+  --putih:     #ffffff;
+  --radius:    12px;
+  --shadow:    0 4px 14px rgba(18, 58, 99, .12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--abu);
+  color: var(--teks);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 { color: var(--biru-tua); line-height: 1.25; }
+a { color: var(--biru); text-decoration: none; }
+img { max-width: 100%; }
+
+/* ---- 2. Header & nav (semua halaman) ---- */
+header.topbar {
+  background: linear-gradient(120deg, var(--biru-tua), var(--biru));
+  color: var(--putih);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  position: sticky; top: 0; z-index: 50;
+}
+header.topbar .brand { display: flex; align-items: center; gap: 12px; }
+header.topbar img.logo { height: 44px; width: 44px; border-radius: 8px; }
+header.topbar .brand h1 { color: var(--putih); font-size: 1.15rem; }
+header.topbar .brand small { color: #cfe0f1; font-size: .72rem; letter-spacing: 2px; }
+header.topbar .spacer { flex: 1; }
+header.topbar .userchip {
+  background: rgba(255,255,255,.15);
+  padding: 6px 14px; border-radius: 20px; font-size: .85rem;
+}
+nav.mainnav {
+  background: var(--putih);
+  border-bottom: 1px solid var(--abu-2);
+  padding: 0 28px;
+  display: flex; gap: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+nav.mainnav a {
+  display: block; padding: 13px 18px; font-weight: 600;
+  color: var(--teks-2); border-bottom: 3px solid transparent;
+  transition: .2s;
+}
+nav.mainnav a:hover { color: var(--biru); }
+nav.mainnav a.active { color: var(--biru); border-bottom-color: var(--kuning); }
+
+/* ---- 3. Layout umum ---- */
+main.wrap { max-width: 1080px; margin: 26px auto 60px; padding: 0 22px; }
+section.card {
+  background: var(--putih);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 26px;
+  margin-bottom: 26px;
+}
+section.card > h2 {
+  font-size: 1.25rem; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 10px;
+}
+section.card > h2::before {
+  content: ''; width: 10px; height: 24px; border-radius: 4px;
+  background: var(--kuning); display: inline-block;
+}
+section.card > p.ket { color: var(--teks-2); font-size: .9rem; margin-bottom: 18px; }
+
+footer.pagefoot {
+  text-align: center; padding: 22px; color: var(--teks-2); font-size: .82rem;
+  border-top: 1px solid var(--abu-2); background: var(--putih);
+}
+
+/* ---- 4. Tombol ---- */
+.btn {
+  display: inline-block; border: none; cursor: pointer; font-family: inherit;
+  padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: .92rem;
+  background: var(--biru); color: var(--putih); transition: .18s;
+}
+.btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.btn.kuning  { background: var(--kuning); color: var(--biru-tua); }
+.btn.kuning:hover { background: var(--kuning-tb); }
+.btn.merah   { background: var(--merah); }
+.btn.hijau   { background: var(--hijau); }
+.btn.putih   { background: var(--putih); color: var(--biru); border: 1.5px solid var(--biru); }
+.btn.small   { padding: 6px 12px; font-size: .8rem; }
+
+/* ---- 5. Form ---- */
+label { display: block; font-weight: 600; font-size: .88rem; margin: 12px 0 5px; }
+input[type=text], input[type=email], input[type=password],
+input[type=number], input[type=date], select {
+  width: 100%; padding: 10px 13px; border: 1.5px solid var(--abu-2);
+  border-radius: 8px; font-size: .95rem; font-family: inherit;
+  background: var(--putih); transition: border .2s;
+}
+input:focus, select:focus { outline: none; border-color: var(--biru); }
+input.err { border-color: var(--merah); background: #fdf0ef; }
+fieldset {
+  border: 1.5px dashed var(--abu-2); border-radius: var(--radius);
+  padding: 6px 18px 18px; margin-bottom: 20px;
+}
+legend { font-weight: 700; color: var(--biru); padding: 0 8px; }
+.formrow { display: flex; gap: 18px; }
+.formrow > div { flex: 1; }
+.pesan-err {
+  display: none; margin-top: 14px; padding: 10px 14px;
+  background: #fdf0ef; color: var(--merah); border-radius: 8px;
+  border: 1px solid #f5c6c3; font-size: .88rem;
+}
+.pesan-ok {
+  display: none; margin-top: 14px; padding: 10px 14px;
+  background: #eafaf1; color: var(--hijau); border-radius: 8px;
+  border: 1px solid #bdeccf; font-size: .88rem;
+}
+
+/* ---- 6. Katalog (stok.html) ---- */
+.grid-buku {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 18px; margin-bottom: 26px;
+}
+.kartu-buku {
+  background: var(--putih); border: 1px solid var(--abu-2);
+  border-radius: var(--radius); overflow: hidden;
+  transition: .2s; box-shadow: var(--shadow);
+}
+.kartu-buku:hover { transform: translateY(-3px); border-color: var(--kuning); }
+.kartu-buku img { width: 100%; height: 200px; object-fit: cover; }
+.kartu-buku .isi { padding: 12px 14px 16px; }
+.kartu-buku h3 { font-size: .98rem; }
+.kartu-buku .penulis { color: var(--teks-2); font-size: .8rem; }
+.kartu-buku .harga { font-weight: 700; color: var(--biru); margin-top: 6px; }
+.badge-stok {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: .72rem; font-weight: 700;
+}
+.badge-stok.aman  { background: #eafaf1; color: var(--hijau); }
+.badge-stok.tipis { background: #fef5e7; color: var(--kuning-tb); }
+.badge-stok.habis { background: #fdf0ef; color: var(--merah); }
+
+/* ---- 7. Tabel (stok / tracking / report) ---- */
+.tablewrap { overflow-x: auto; }
+table.tabel {
+  width: 100%; border-collapse: collapse; font-size: .88rem;
+}
+table.tabel th {
+  background: var(--biru-tua); color: var(--putih);
+  padding: 10px 12px; text-align: left; white-space: nowrap;
+}
+table.tabel td { padding: 9px 12px; border-bottom: 1px solid var(--abu-2); }
+table.tabel tr:nth-child(even) { background: #fafbfd; }
+table.tabel tr:hover { background: #fffbea; }
+table.tabel tr:last-child td { border-bottom: none; }
+
+/* ---- 8. Dashboard menu ---- */
+.menu-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.menu-item {
+  background: linear-gradient(140deg, var(--biru-tua), var(--biru));
+  color: var(--putih); border-radius: var(--radius); padding: 22px;
+  min-height: 120px; display: flex; flex-direction: column; justify-content: 
+  space-between; box-shadow: var(--shadow); transition: .2s;
+}
+.menu-item:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(18,58,99,.3); }
+.menu-item .ikon { font-size: 2rem; }
+.menu-item h3 { color: var(--putih); margin: 8px 0 2px; font-size: 1.02rem; }
+.menu-item p  { color: #cfe0f1; font-size: .8rem; }
+.greeting {
+  background: linear-gradient(120deg, var(--kuning), var(--kuning-tb));
+  border-radius: var(--radius); padding: 20px 24px; margin-bottom: 24px;
+  color: var(--biru-tua); box-shadow: var(--shadow);
+}
+.greeting h2 { color: var(--biru-tua); font-size: 1.4rem; }
+.greeting p  { font-size: .9rem; opacity: .85; }
+
+/* ---- 9. Modal box ---- */
+.modal-layar {
+  display: none; position: fixed; inset: 0; z-index: 100;
+  background: rgba(15, 30, 48, .55);
+  justify-content: center; align-items: center; padding: 20px;
+}
+.modal-layar.tampil { display: flex; }
+.modal-kotak {
+  background: var(--putih); border-radius: var(--radius);
+  max-width: 480px; width: 100%; padding: 24px 26px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.3);
+  animation: naik .25s ease;
+}
+@keyframes naik { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.modal-kotak h3 { margin-bottom: 6px; }
+.modal-kotak p  { color: var(--teks-2); font-size: .92rem; }
+.modal-aksi { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.modal-tutup {
+  float: right; background: none; border: none; font-size: 1.3rem;
+  cursor: pointer; color: var(--teks-2);
+}
+#modalAlert { max-width: 380px; text-align: center; }
+#modalAler .modal-aksi { justify-content: center; }
+
+/* ---- 10. Tracking (progress bar) ---- */
+.progress-lacak { margin: 18px 0 8px; }
+.progress-track {
+  height: 10px; background: var(--abu-2); border-radius: 6px; overflow: hidden;
+}
+.progress-isi {
+  height: 100%; width: 0%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--kuning), var(--kuning-tb));
+  transition: width .9s ease;
+}
+.progress-label {
+  display: flex; justify-content: space-between; margin-top: 10px;
+  font-size: .78rem; color: var(--teks-2); font-weight: 600;
+}
+.progress-label span.aktif { color: var(--biru); }
+.status-chip {
+  display: inline-block; padding: 5px 14px; border-radius: 14px;
+  color: var(--putih); font-weight: 700; font-size: .82rem;
+}
+
+/* ---- 11. Highlight code klasifikasi table garis kuning outline (detail opsional) ---- */
+.detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px;
+  margin-top: 16px;
+}
+.detail-grid .label { color: var(--teks-2); font-size: .8rem; }
+.detail-grid .nilai { font-weight: 700; color: var(--biru-tua); }
+
+/* ---- 12. Login (index.html) ---- */
+body.pagelogin {
+  display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(135deg, var(--biru-tua) 0%, var(--biru) 55%, #2d6aa3 100%);
+}
+.loginbox {
+  background: var(--putih); border-radius: 16px; padding: 34px 34px 26px;
+  width: 400px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.loginbox .head { text-align: center; margin-bottom: 22px; }
+.loginbox .head img { height: 84px; margin-bottom: 10px; }
+.loginbox .head h1 { font-size: 1.3rem; }
+.loginbox .head p { color: var(--teks-2); font-size: .88rem; }
+.loginbox .linkbawah { display: flex; justify-content: space-between; margin-top: 16px; }
+.loginbox .linkbawah a { font-size: .88rem; cursor: pointer; font-weight: 600; }
+.loginbox .linkbawah a:hover { color: var(--kuning-tb); }
+.hint {
+  margin-top: 18px; background: #fffbea; border: 1px dashed var(--kuning);
+  padding: 10px 12px; border-radius: 8px; font-size: .8rem; color: #8a6d1a;
+}
+
+/* ---- 13. Responsif ---- */
+@media (max-width: 720px) {
+  .formrow { flex-direction: column; gap: 0; }
+  nav.mainnav { overflow-x: auto; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .loginbox { margin: 22px 14px; }
+  main.wrap { margin-top: 18px; padding: 0 14px; }
+}

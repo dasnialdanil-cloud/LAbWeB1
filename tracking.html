@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking Pengiriman - BUKU KITA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ============================================================
+       CSS INTERNAL (contoh CSS internal pada halaman ini)
+       ============================================================ -->
+  <style>
+    #hasilLacak { animation: naik .4s ease; }
+    .progress-label span { transition: .3s; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="assets/logo.png" alt="Logo Buku Kita">
+      <div>
+        <h1>BUKU KITA</h1>
+        <small>TOKO BUKU ONLINE</small>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="userchip" id="userChip">👤 Mahasiswa</span>
+    <button class="btn small merah" id="btnKeluar">Logout</button>
+  </header>
+
+  <nav class="mainnav">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="stok.html">📚 Stok/Katalog</a>
+    <a href="checkout.html">🛒 Pemesanan</a>
+    <a href="tracking.html" class="active">🚚 Tracking</a>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ====== FORM LACAK (input Nomor Delivery Order + tombol Cari) ====== -->
+    <section class="card" aria-label="Form lacak pengiriman">
+      <h2>🚚 Tracking Pengiriman</h2>
+      <p class="ket">
+        Masukkan <b>Nomor Delivery Order (DO)</b> lalu tekan tombol &ldquo;Cari&rdquo;.
+        Data diambil dari variabel <code>dataPengiriman</code> pada <code>js/data.js</code>.
+      </p>
+
+      <form id="formTrack" novalidate>
+        <div class="formrow" style="align-items:flex-end">
+          <div>
+            <label for="inputDO">Nomor Delivery Order</label>
+            <input type="text" id="inputDO" placeholder="contoh: DO-2026-0001">
+          </div>
+          <div style="flex:0 0 auto">
+            <button type="submit" class="btn kuning" id="btnCari">🔍 Cari</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="hint" style="margin-top:16px">
+        <b>Nomor DO untuk demo:</b> DO-2026-0001 · DO-2026-0002 · DO-2026-0003 · DO-2026-0004
+      </div>
+    </section>
+
+    <!-- ====== HASIL LACAK (ditampilkan setelah tombol Cari ditekan) ====== -->
+    <section class="card" id="hasilLacak" style="display:none" aria-label="Hasil lacak">
+
+      <h2>📦 Hasil Lacak</h2>
+      <p class="ket">Status pengiriman disimulasikan dengan progress bar berwarna.</p>
+
+      <div style="margin-bottom:14px">
+        <span class="status-chip" id="statusChip" style="background:#8395a7">Dikemas</span>
+      </div>
+
+      <!-- progress bar 5 tahap -->
+      <div class="progress-lacak" aria-label="Progress pengiriman">
+        <div class="progress-track">
+          <div class="progress-isi" id="progressIsi"></div>
+        </div>
+        <div class="progress-label">
+          <span>Dikemas</span>
+          <span>Dikirim</span>
+          <span>Transit</span>
+          <span>Sampai</span>
+          <span>Diterima</span>
+        </div>
+      </div>
+
+      <!-- detail pengiriman -->
+      <div class="detail-grid" style="margin-top:22px">
+        <div><div class="label">Nama Pemesan</div><div class="nilai" id="ckNama">-</div></div>
+        <div><div class="label">Kota Tujuan</div><div class="nilai" id="ckKota">-</div></div>
+        <div><div class="label">Detail Ekspedisi</div><div class="nilai" id="ckEkspedisi">-</div></div>
+        <div><div class="label">Tanggal Kirim</div><div class="nilai" id="ckTgl">-</div></div>
+        <div><div class="label">Jenis Paket</div><div class="nilai" id="ckPaket">-</div></div>
+        <div><div class="label">Total Pembayaran</div><div class="nilai" id="ckTotal">-</div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pagefoot">
+    © 2026 BUKU KITA &mdash; Membangun frontend dengan HTML semantik, CSS, dan JavaScript DOM.
+  </footer>
+
+  <!-- ====== MODAL ALERT ====== -->
+  <div class="modal-layar" id="modalAlert">
+    <div class="modal-kotak">
+      <div style="font-size:2.4rem" id="alertIkon">❌</div>
+      <h3 style="text-align:center" id="alertJudul">Judul</h3>
+      <p style="text-align:center" id="alertPesan">Pesan</p>
+      <div class="modal-aksi">
+        <button class="btn kuning" data-tutup="#modalAlert">Oke</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

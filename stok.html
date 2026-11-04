@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stok/Katalog - BUKU KITA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="assets/logo.png" alt="Logo Buku Kita">
+      <div>
+        <h1>BUKU KITA</h1>
+        <small>TOKO BUKU ONLINE</small>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="userchip" id="userChip">👤 Mahasiswa</span>
+    <button class="btn small merah" id="btnKeluar">Logout</button>
+  </header>
+
+  <nav class="mainnav">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="stok.html" class="active">📚 Stok/Katalog</a>
+    <a href="checkout.html">🛒 Pemesanan</a>
+    <a href="tracking.html">🚚 Tracking</a>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ====== KATALOG GRID (render dinamis dari dataKatalogBuku) ====== -->
+    <section class="card" aria-label="Katalog buku">
+      <h2>📚 Informasi Stok/Katalog</h2>
+      <p class="ket">
+        Katalog tampil dinamis dari variabel konstanta <code>dataKatalogBuku</code>
+        (Array JSON) pada file <code>js/data.js</code> &mdash; bukan dari database.
+      </p>
+
+      <form onsubmit="return false" style="display:flex; gap:12px; margin-bottom:20px">
+        <input type="text" id="caribuku" placeholder="🔍 Cari judul / penulis / genre...">
+        <button class="btn kuning" onclick="bukaModal('#modalTambah')">＋ Tambah Stok</button>
+      </form>
+
+      <div class="grid-buku" id="gridBuku"></div>
+    </section>
+
+    <!-- ====== TABEL STOK ====== -->
+    <section class="card" aria-label="Tabel stok">
+      <h2>📋 Tabel Stok Buku</h2>
+      <p class="ket" id="infoStok">Total 0 judul buku</p>
+      <div class="tablewrap">
+        <table class="tabel">
+          <thead>
+            <tr>
+              <th>ID</th><th>Judul</th><th>Penulis</th>
+              <th>Genre</th><th>Harga</th><th>Stok</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyStok"></tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px; color:#5b6b7b; font-size:.85rem">
+        Baris baru ditambahkan dengan <code>document.createElement()</code> (JavaScript DOM)
+        dan disimpan ke <code>localStorage</code>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="pagefoot">
+    © 2026 BUKU KITA &mdash; Membangun frontend dengan HTML semantik, CSS, dan JavaScript DOM.
+  </footer>
+
+  <!-- ====== MODAL TAMBAH STOK ====== -->
+  <div class="modal-layar" id="modalTambah">
+    <div class="modal-kotak">
+      <button class="modal-tutup" data-tutup="#modalTambah" aria-label="Tutup">✕</button>
+      <h3>➕ Tambah Stok Buku</h3>
+      <p>Data akan langsung tampil di tabel &amp; katalog.</p>
+      <form id="formTambah" novalidate>
+        <div class="formrow">
+          <div>
+            <label for="tJudul">Judul buku</label>
+            <input type="text" id="tJudul" placeholder="Judul">
+          </div>
+          <div>
+            <label for="tPenulis">Penulis</label>
+            <input type="text" id="tPenulis" placeholder="Penulis">
+          </div>
+        </div>
+        <div class="formrow">
+          <div>
+            <label for="tGenre">Genre</label>
+            <select id="tGenre">
+              <option>Novel</option>
+              <option>Klasik</option>
+              <option>Pendidikan</option>
+              <option>Referensi</option>
+              <option>Komputer</option>
+            </select>
+          </div>
+          <div>
+            <label for="tHarga">Harga (Rp)</label>
+            <input type="number" id="tHarga" placeholder="80000" min="1000">
+          </div>
+        </div>
+        <label for="tStok">Jumlah stok</label>
+        <input type="number" id="tStok" placeholder="10" min="0">
+        <div class="modal-aksi">
+          <button type="button" class="btn putih" data-tutup="#modalTambah">Batal</button>
+          <button type="submit" class="btn kuning">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====== MODAL ALERT ====== -->
+  <div class="modal-layar" id="modalAlert">
+    <div class="modal-kotak">
+      <div style="font-size:2.4rem" id="alertIkon">❌</div>
+      <h3 style="text-align:center" id="alertJudul">Judul</h3>
+      <p style="text-align:center" id="alertPesan">Pesan</p>
+      <div class="modal-aksi">
+        <button class="btn kuning" data-tutup="#modalAlert">Oke</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - BUKU KITA</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ============================================================
+       CSS INTERNAL (contoh penggunaan CSS internal pada halaman ini)
+       ============================================================ -->
+  <style>
+    #panelHistory tbody tr:hover { background: #fff9e6; }
+    .menu-item a { color: inherit; }
+    .greeting h2 em { font-style: normal; color: #7a3d07; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="assets/logo.png" alt="Logo Buku Kita">
+      <div>
+        <h1>BUKU KITA</h1>
+        <small>TOKO BUKU ONLINE</small>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="userchip" id="userChip">👤 Mahasiswa</span>
+    <button class="btn small merah" id="btnKeluar">Logout</button>
+  </header>
+
+  <nav class="mainnav">
+    <section aria-label="menu">
+      <a href="dashboard.html" class="active">🏠 Dashboard</a>
+      <a href="stok.html">📚 Stok/Katalog</a>
+      <a href="checkout.html">🛒 Pemesanan</a>
+      <a href="tracking.html">🚚 Tracking</a>
+    </section>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- GREETING BERDASARKAN WAKTU LOCAL (pagi/siang/sore/malam) -->
+    <div class="greeting">
+      <h2 id="greet">Selamat siang, Buku! <em>👋</em></h2>
+      <p id="greetSub">Selamat belanja buku.</p>
+    </div>
+
+    <!-- MENU UTAMA (navigasi, sesuai soal) -->
+    <section class="card" aria-label="Menu utama">
+      <h2>Menu Utama</h2>
+      <p class="ket">Pilih menu berikut untuk mengelola toko buku Anda.</p>
+      <div class="menu-grid">
+        <a class="menu-item" href="stok.html">
+          <span class="ikon">📚</span>
+          <div>
+            <h3>Informasi Stok/Katalog</h3>
+            <p>Lihat &amp; tambahkan stok buku</p>
+          </div>
+        </a>
+        <a class="menu-item" href="tracking.html">
+          <span class="ikon">🚚</span>
+          <div>
+            <h3>Tracking Pengiriman</h3>
+            <p>Cari status delivery order</p>
+          </div>
+        </a>
+        <button class="menu-item" data-panel="#panelLaporan" style="border:none; cursor:pointer">
+          <span class="ikon">🧾</span>
+          <div>
+            <h3>Laporan Pemesanan</h3>
+            <p>Ringkasan pesanan berjalan</p>
+          </div>
+        </button>
+        <button class="menu-item" data-panel="#panelHistory" style="border:none; cursor:pointer">
+          <span class="ikon">🕘</span>
+          <div>
+            <h3>History Transaksi</h3>
+            <p>Riwayat pembelian Anda</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- LAPORAN PEMESANAN (panel di dalam dashboard) -->
+    <section class="card" id="panelLaporan" aria-label="Laporan pemesanan">
+      <h2>🧾 Laporan Pemesanan</h2>
+      <p class="ket">Data dari variabel <code>dataPesanan</code> pada file <code>data.js</code>.</p>
+      <div class="tablewrap">
+        <table class="tabel">
+          <thead>
+            <tr><th>ID</th><th>Buku</th><th>Qty</th><th>Harga</th><th>Subtotal</th><th>Status</th></tr>
+          </thead>
+          <tbody id="tbodyLaporan"></tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px; color:#5b6b7b; font-size:.9rem" id="lapTotal"></p>
+      <a class="btn kuning" href="checkout.html" style="margin-top:10px">➕ Kelola pesanan</a>
+    </section>
+
+    <!-- HISTORY TRANSAKSI (panel di dalam dashboard) -->
+    <section class="card" id="panelHistory" aria-label="History transaksi">
+      <h2>🕘 History Transaksi</h2>
+      <p class="ket">Data dari variabel <code>dataTransaksi</code> pada file <code>data.js</code>.</p>
+      <div class="tablewrap">
+        <table class="tabel">
+          <thead>
+            <tr><th>Faktur</th><th>Tanggal</th><th>Buku</th><th>Total</th><th>Metode</th><th>Status</th></tr>
+          </thead>
+          <tbody id="tbodyHistory"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pagefoot">
+    © 2026 BUKU KITA &mdash; Membangun frontend dengan HTML semantik, CSS, dan JavaScript DOM.
+  </footer>
+
+  <!-- MODAL ALERT -->
+  <div class="modal-layar" id="modalAlert">
+    <div class="modal-kotak">
+      <div style="font-size:2.4rem" id="alertIkon">❌</div>
+      <h3 style="text-align:center" id="alertJudul">Judul</h3>
+      <p style="text-align:center" id="alertPesan">Pesan</p>
+      <div class="modal-aksi">
+        <button class="btn kuning" data-tutup="#modalAlert">Oke</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
